@@ -1,26 +1,32 @@
 const express = require("express");
 const app = express();
 
-app.use("/test", (req, res) => {
-    res.send("/test incoming request for userside");
-})
-app.get('/search', (req, res) => {
-    const query = req.query.query; // Access 'query' parameter
-    const sort = req.query.sort;  // Access 'sort' parameter
-    res.send(`Search term: ${query}, Sort order: ${sort}`);
-});
-
-app.get('/user(/profile)?', (req, res) => {
-    res.send('Matched user or user/profile route!');
-});
-
-// app.use("*", (req, res) => {
-//     res.send("blblblblblbllblblbfest for userside");
-// })
-// app.use((req, res) => {
-//     res.send("this is responce back for /test incoming request for userside");
-// })
+app.use(
+    "/user",
+    [
+        (req, res, next) => {
+            console.log("Running to responded 1st");
+            next(); // Ensure you call next() to pass control to the next middleware
+        },
+        (req, res, next) => {
+            console.log("Running to responded 2nd");
+            next(); // Continue to the next middleware
+        },
+        (req, res, next) => {
+            console.log("Running to responded 3rd");
+            next(); // Pass to the next middleware
+        },
+        (req, res, next) => {
+            console.log("Running to responded 4th");
+            next(); // Pass to the next middleware
+        },
+        (req, res) => {
+            console.log("Running to responded 5th");
+            res.send("5th Responded"); // Send a response to the client
+        },
+    ]
+);
 
 app.listen(1313, () => {
-    console.log("server is running in port 1313.....")
+    console.log("Server is running on port 1313...");
 });
