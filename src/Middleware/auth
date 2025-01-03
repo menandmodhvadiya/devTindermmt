@@ -1,0 +1,15 @@
+// Admin Authentication Middleware
+const adminAuthMiddleware = (req, res, next) => {
+    console.log("Checking admin authorization...");
+    const token = "xyz"; // Retrieve token from headers
+    console.log("token", token)
+    const adminIsAuthenticated = token === "xyz"; // Validate token
+
+    if (!adminIsAuthenticated) {
+        return res.status(401).send("Admin is unauthorized");
+    }
+
+    console.log("Admin is authorized");
+    next(); // Proceed to the next middleware or route handler
+};
+module.exports = { adminAuthMiddleware }
