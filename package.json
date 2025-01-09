@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "src/app.js",
-    "dev":"nodemon src/app.js"
+    "dev": "nodemon server.js"
   },
   "author": "Menand Modhvadiya",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.3"
   }
 }
